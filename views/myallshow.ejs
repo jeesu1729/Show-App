@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="stylesheet/allshow.css">
+    <title>Document</title>
+</head>
+<body>
+    <%- include('./partials/navbar') %> 
+    <div class="cont">  
+        <h1 style="font-size: 3em; margin: 1em 0 1em 0; ">Your Shows</h1> 
+        <div style="display: flex; justify-content: flex-end;">
+            <form  action="/search" method="POST">
+                <input type="text" name="query" class="searchTerm" placeholder="Search">
+            </form>
+        </div>
+        <% for (let val of result) {%>
+            
+                <div class="carde">
+                        <img class="imge" src="<%= 'https://image.tmdb.org/t/p/w500/' + val.show_detail.poster_path%>" alt="">
+                    <div class="bodye">
+                        <a href="/series/<%=val.showid%>"><h2 style="margin: 0.3em 0 0.1em 0; text-decoration: none; color: black; "><%= val.show_detail.name %> </h2></a>
+                        <h5 style="margin: 0 0 0 0.4em; font-size: 0.9em; font-weight: 200;">-<%= val.show_detail.network %> </h5>
+                        <p style="margin: 0.5em 0 0 0;"><%= val.show_detail.overview %> </p>
+                        <h4 style="margin: 0.3em 0 0 0;">Last Aired</h4>
+                        <h4 style="display: inline-block; margin: 0.2em 0 0 0;padding: 0.3em; background-color: rgb(0, 180, 204,0.8); border-radius: 10%;">Season : <%= val.show_detail.last_season %></h4>
+                        <h4 style="display: inline-block; margin: 0.2em 0 0 0;padding: 0.3em; background-color: rgb(255, 0, 0,0.8); border-radius: 10%;">Episode : <%= val.show_detail.last_episode %></h4>
+                        <h4 style="margin: 0.3em 0 0 0;">You Watched</h4>
+                        <h4 style="display: inline-block; margin: 0.2em 0 0 0;padding: 0.3em; background-color: rgb(0, 180, 204,0.8); border-radius: 10%;">Season : <%= val.info.season %></h4>
+                        <h4 style="display: inline-block; margin: 0.2em 0 0 0;padding: 0.3em; background-color: rgb(255, 0, 0,0.8); border-radius: 10%;">Episode : <%= val.info.episode %></h4>
+                    </div>
+                </div> 
+            
+        <% } %> 
+    </div>
+</body>
+</html>

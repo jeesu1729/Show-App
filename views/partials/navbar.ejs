@@ -1,0 +1,19 @@
+<nav style="width: 100%; background-color: rgb(39, 38, 38); display: flex; justify-content: center;">
+    <div style="width: 80%; display: flex; justify-content: space-between;">
+      <div style="margin: 0.5em 0 0.2em 0;">
+        <a href="/" style="color: white; font-size: 2em; margin: 0 1em 0 0;text-decoration: none;">ShowApp</a>
+        <a href="/" style="color: red; font-size: 1.3em; margin: 0 0.5em 0 0;text-decoration: none;">Home</a>
+        <a href="/myallshow" style="color: red; font-size: 1.3em; margin: 0 0.5em 0 0;text-decoration: none;">MyAllShow</a>
+        <a href="/search" style="color: red; font-size: 1.3em; margin: 0 0.5em 0 0;text-decoration: none;">Search</a>
+        </div>
+      <div style="margin: 1em 0 1em 0;">
+          <% if(!currentuser) {%> 
+          <a href="/login" style="color: #00B4CC; font-size: 1.3em; margin: 0 0.5em 0 0;text-decoration: none;">LogIn</a>
+          <a href="/register" style="color: #00B4CC; font-size: 1.3em; margin: 0 0.5em 0 0;text-decoration: none;" >Register</a>
+          <% }else { %> 
+          <a href="/logout" style="color: #00B4CC; font-size: 1.3em; margin: 0 0.5em 0 0;text-decoration: none;">LogOut  <%= currentuser.username %> </a>
+          <% } %> 
+      </div>
+    </div>
+   
+</nav>

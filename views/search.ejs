@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body>
+    <%- include('./partials/navbar') %> 
+    <div style="margin: 10px 5%;">
+    <form action="/search" method="post" style="margin: 10px">
+        <input type="text" name="query">
+        <button>search show</button>
+    </form>
+    
+    <% if(resulte != null){ %> 
+        <% if(resulte.results != null){ %> 
+        <% for (let val of resulte.results) {%>
+            <div class="card mb-3"> 
+                <div class="row">
+                    <div class="col-md-4">
+                        <img class="img-fluid" src="<%= 'https://image.tmdb.org/t/p/w500' + val.backdrop_path%>" alt="">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title"><%= val.name %></h5>
+                            <p class="card-text"><%= val.overview %></p>
+                            <p class="card-text">
+                                <small class="text-muted"><%= val.id %></small>
+                            </p>
+                            <a href="/series/<%=val.id%>" class="btn btn-primary">View <%= val.name %></a>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        <% } %> 
+        <% } %> 
+    <% } %> 
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+</body>
+</html>

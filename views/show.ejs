@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheet/show.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    
+    <title>Document</title>
+</head>
+<body>
+    <%- include('./partials/navbar') %> 
+    <div class="cont" >
+   
+<% if(resulte != null){ %> 
+       
+    <div class="card mb-3" > 
+        <div class="row">
+            <div class="col-md-4">
+                <img class="img-fluid" src="<%= 'https://image.tmdb.org/t/p/w500/' + resulte.poster_path%>" alt="" >
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h1 class="card-title"><%= resulte.name %></h1>
+                    <p class="card-text"><%= resulte.networks[0].name %></p>
+                    <h5>Genre :- <% for (let t of resulte.genres){ %>
+                           <%= t.name %> 
+                        <%  } %> </h5>
+                    <h5>Last Season : <%= resulte.last_episode_to_air.season_number %> </h5>
+                    <h5>Last Episode :  <%= resulte.last_episode_to_air.episode_number %></h5>
+                    <h6 class="card-text">
+                        Overview :-<small class="text-muted"><%= resulte.overview %></small>
+                    </h6>
+                    <h6>Popularity : <%= resulte.popularity %> </h6>
+                    <h6>Average vote : <%= resulte.vote_average %> </h6>
+
+
+
+
+                    <form action="/series/<%=resulte.id%>" method="post">
+                        <input type="hidden" value="<%=resulte.id%>" name="totalinfo[showid]">
+                        <input type="hidden" value="<%=resulte.name%>" name="totalinfo[name]">
+                        <input type="hidden" value="<%=resulte.overview%>" name="totalinfo[overview]">
+                        <input type="hidden" value="<%=resulte.poster_path%>" name="totalinfo[poster_path]">
+                        <input type="hidden" value="<%=resulte.last_episode_to_air.season_number%>" name="totalinfo[last_season]">
+                        <input type="hidden" value="<%=resulte.last_episode_to_air.episode_number%>" name="totalinfo[last_episode]">
+                        <input type="hidden" value="<%=resulte.networks[0].name%>" name="totalinfo[network]">
+                        
+
+                        <% if(yours != null){ %> 
+                            <label for="season">season</label>
+                            <input class="form-control" style="width: 40%; display: inline-block;" type="number" id="season" min="1" max="<%=resulte.last_episode_to_air.season_number%>" name="info[season]" value="<%= yours.season %>">
+                            <label for="episode">episode</label>
+                            <input class="form-control" style="width: 40%; display: inline-block;" type="number" id="epsode" min="1" name="info[episode]" value="<%= yours.episode %>">
+                            <button class="btn btn-success" style="margin: 1em 0 0 0;">Update</button>
+                        <% }else{ %> 
+
+                        <label for="season">season</label>
+                        <input class="form-control" style="width: 40%; display: inline-block;" type="number" id="season" min="1" max="<%=resulte.last_episode_to_air.season_number%>" name="info[season]">
+                        <label for="episode">episode</label>
+                        <input class="form-control" style="width: 40%; display: inline-block;" type="number" id="epsode" min="1" name="info[episode]">
+                        <button class="btn btn-success" style="margin: 1em 0 0 0;">Add</button>
+                        <% } %> 
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+<% } %> 
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+</body>
+</html>
